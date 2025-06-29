@@ -67,3 +67,6 @@ OS Understanding
 
 ## Os161 Build and Run
 - [Os 161 Build and Run](docs/running_building_os161.md)
+
+## CUstomising terminal
+- [Customise Terminal](docs/customising_terminal_theme.md)

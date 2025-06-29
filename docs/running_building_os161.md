@@ -22,3 +22,19 @@
         - Move it to `$HOME/root` in the vm
     - Run kernel on sys161
         - `sys161 kernel`
+
+
+# Making Changed to kernel
+- After change code we just need to run below command to compile the kerrnel and install it to sysy161
+    - `cs kern/conf`
+    - `bmake`
+    - `bmake install`
+- If we change the header file , we will need to reconfigure kernel and start from `bmake depend`
+- If we add a new file we need to configure the same in below conf file
+    - `kern/conf/conf.kern` file
+
+
+# Build user tools
+- `cd os161`
+- `bmake -j8`
+- `bmake -j8 install`
