@@ -7,18 +7,6 @@ OS Understanding
 ## GCC
 - The GNU Compiler Collection, commonly known as GCC, is a set of compilers and development tools available for Linux, Windows, various BSDs, and a wide assortment of other operating systems. It includes support primarily for C and C++ and includes Objective-C, Ada, Go, Fortran, and D.
 
-## Install Virtual Box
-- Vagrant Needs a provider like virtual box available
-- [Install Vbox](install_vbox_ubuntu24.10.md)
-- Recompile and Install Kernel module
-  - `sudo /sbin/vboxconfig`
-- check vbox correctly installed
-  - `VBoxManage --version`
-  - If it gives error asking to sign the kernel modules then Sign the kernel module
-
-## Sign Kernel Modules if Secure Boot is Enabled
-- In my machine disabling secure wasn't working so had to sign the kernel modules
-- [Sign Kernel Modules](sign_kernel_module.md)
 
 ## Install Qemu
 - ` sudo apt install qemu-kvm libvirt-daemon-system virtinst bridge-utils virt-manager`
@@ -60,32 +48,13 @@ OS Understanding
 - Connect to VM with ssh
   - `ssh os161@localhost -p 2222`
 
-## Install Vagrant
-
+## Running Remote code in local vscode
 ```bash
-    $ curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-    $ sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-    $ sudo apt-get update && sudo apt-get install vagrant
+  sudo apt install sshfs
+  mkdir ~/vm-code
+  sshfs -p 2222 os161@localhost:/home/os161 ~/vm-code
+  code ~/vm-code
 ```
-
-## Running the code
-
-```bash
-    git clone https://github.com/ops-class/vagrant
-    cd vagrant && vagrant up --provider=virtualbox
-```
-
-## VirtualBox + KVM conflict
-- [Disable KVM Manually](disable_kvm.md) or run below script
-- Run Script
-  - `chmod +x disable-kvm-for-virtualbox.sh`
-  - `./disable-kvm-for-virtualbox.sh`
-- Update your Vagrant box 
-  ```bash
-      vagrant box add ubuntu/focal64
-      vagrant destroy -f
-      vagrant up --provision
-  ```
 
 
 ## Installing the Toolchain
@@ -96,3 +65,5 @@ OS Understanding
     sudo apt-get install os161-toolchain
 ```
 
+## Os161 Build and Run
+- [Os 161 Build and Run](docs/running_building_os161.md)
