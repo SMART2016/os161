@@ -20,6 +20,46 @@ OS Understanding
 - In my machine disabling secure wasn't working so had to sign the kernel modules
 - [Sign Kernel Modules](sign_kernel_module.md)
 
+## Install Qemu
+- ` sudo apt install qemu-kvm libvirt-daemon-system virtinst bridge-utils virt-manager`
+- `sudo apt update`
+- `sudo apt install qemu-system-x86`
+- Create image disk
+  - `qemu-img create -f qcow2 ubuntu16.qcow2 20G`
+- Run Image
+  - `qemu-system   -m 2048   -cdrom ubuntu-16.04.7-desktop-amd64.iso   -boot d   -hda ubuntu16.qcow2   -enable-kvm   -net nic   -net user`
+  -  Explanation:
+    -m 2048 → 2GB RAM
+    -cdrom → path to ISO
+    -boot d → boot from CD-ROM
+    -hda → disk file
+    -enable-kvm → enables hardware acceleration (if supported)
+    -net nic -net user → basic NAT networking
+- Once Ubuntu is installed, boot like this:
+  ```bash
+    qemu-system-x86_64 \
+    -m 2048 \
+    -hda ubuntu16.qcow2 \
+    -enable-kvm \
+    -vga qxl \
+    -display default \
+    -net nic \
+    -net user,hostfwd=tcp::2222-:22 \
+    -spice port=5930,disable-ticketing=on \
+    -display spice-app
+
+  ```
+- Inside your Ubuntu VM:
+  ```bash
+      sudo apt update
+      sudo apt install spice-vdagent qemu-guest-agent
+  ```
+
+## Setup SSH
+- Install SSH in VM
+
+- Connect to VM with ssh
+  - `ssh os161@localhost -p 2222`
 
 ## Install Vagrant
 
@@ -35,6 +75,19 @@ OS Understanding
     git clone https://github.com/ops-class/vagrant
     cd vagrant && vagrant up --provider=virtualbox
 ```
+
+## VirtualBox + KVM conflict
+- [Disable KVM Manually](disable_kvm.md) or run below script
+- Run Script
+  - `chmod +x disable-kvm-for-virtualbox.sh`
+  - `./disable-kvm-for-virtualbox.sh`
+- Update your Vagrant box 
+  ```bash
+      vagrant box add ubuntu/focal64
+      vagrant destroy -f
+      vagrant up --provision
+  ```
+
 
 ## Installing the Toolchain
 
