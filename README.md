@@ -47,7 +47,6 @@ OS Understanding
     -net user,hostfwd=tcp::2222-:22 \
     -spice port=5930,disable-ticketing=on \
     -display spice-app
-
   ```
 - Inside your Ubuntu VM:
   ```bash
