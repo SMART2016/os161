@@ -55,7 +55,7 @@ OS Understanding
 ```bash
   sudo apt install sshfs
   mkdir ~/vm-code
-  sshfs -p 2222 os161@localhost:/home/os161 ~/vm-code
+  sshfs -p 2222 os161@localhost:/home/os161/work/os161 /mnt/code/vm-os161-code
   code ~/vm-code
 ```
 
