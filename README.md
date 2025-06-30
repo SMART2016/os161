@@ -42,6 +42,9 @@ OS Understanding
       sudo apt install spice-vdagent qemu-guest-agent
   ```
 
+## Configure VM to start during startup
+- [Configure os161 as a service](docs/configuring_os161_vm_as_service.md)
+
 ## Setup SSH
 - Install SSH in VM
 
@@ -70,3 +73,24 @@ OS Understanding
 
 ## CUstomising terminal
 - [Customise Terminal](docs/customising_terminal_theme.md)
+
+## Debugging with GDB
+- `cd ~/root`
+- Run the kernel in one window in debug mode
+  - `sys161 -w kernel`
+  - sysy161 creates few sockets when it runs the kernel and one of them is gdb
+    - `ls -l .sockets/`
+  - GDB connects to the sys161 using the same socket with below command
+    - `target remote unix:.sockets/gdb`
+- Run GDB in another window
+  - `os161-gdb kernel`
+  - `target remote unix:.sockets/gdb`
+- Adding breakpoints in gdb
+  - `b cmd_panic`
+  - For the kernel to continue type `c` in gdb console
+  - Run `l` in gdb console to get some context around the command that ran
+    - to go to a line number run `l <line number>`
+  - Run `n` for next debug breakpoint.
+  - Run `bt` on gdb console to get back trace of the error
+  - Run `up` and `down` to run up and down the stack for the error got with `bt`
+  
