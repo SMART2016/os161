@@ -21,10 +21,11 @@
         - Get the sys161 conf from [here](https://ops-class.org/files/sys161.conf)
         - Move it to `$HOME/root` in the vm
     - Run kernel on sys161
+        - `cd ~/root`
         - `sys161 kernel`
 
 
-# Making Changed to kernel
+# Making Changes to kernel
 - After change code we just need to run below command to compile the kerrnel and install it to sysy161
     - `cs kern/conf`
     - `bmake`
