@@ -54,7 +54,7 @@ OS Understanding
 ## Running Remote code in local vscode
 ```bash
   sudo apt install sshfs
-  mkdir ~/vm-code
+  mkdir ~/vm-os161-code
   sshfs -p 2222 os161@localhost:/home/os161/work/os161 /mnt/code/vm-os161-code
   code ~/vm-code
 ```
